@@ -14,6 +14,17 @@ export const useUserAuthStore = defineStore('userAuth', () => {
 
   const isAuthenticated = computed(() => !!user.value.token)
 
+  const userChecker = () => {
+    logout()
+    console.log('store log______________', user.value)
+    setUser()
+    // setToken()
+  }
+
+  const userLogin = (data) => {
+    console.log('store log______________', data)
+  }
+
   const setUser = (userData) => {
     user.value = userData
   }
@@ -38,6 +49,7 @@ export const useUserAuthStore = defineStore('userAuth', () => {
   return {
     user,
     isAuthenticated,
+    userLogin,
     setUser,
     setToken,
     logout,

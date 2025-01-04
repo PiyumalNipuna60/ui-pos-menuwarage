@@ -1,13 +1,12 @@
 <template>
-  <header>
+  <!-- <header>
     <div class="wrapper">
-      <div @click="buttonClick" class="button">Go to About</div>
-      <!-- <nav>
+       <nav>
         <RouterLink to="/">Home</RouterLink>
         <RouterLink to="/about">About</RouterLink>
-      </nav> -->
+      </nav>
     </div>
-  </header>
+  </header> -->
 
   <RouterView />
 </template>
