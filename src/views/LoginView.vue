@@ -39,7 +39,7 @@
 <script setup>
 import { useUserAuthStore } from '@/stores/userAuth'
 import { useRouter } from 'vue-router'
-import { ref } from 'vue'
+import { onMounted, ref } from 'vue'
 
 const userAuthStore = useUserAuthStore()
 const router = useRouter()
@@ -48,6 +48,7 @@ const username = ref('')
 const password = ref('')
 const checked = ref(false)
 
+onMounted(() => {})
 const userLogin = async () => {
   try {
     const response = userAuthStore.userLogin({
@@ -62,16 +63,8 @@ const userLogin = async () => {
 }
 
 const forgetPassword = async () => {
-  try {
-    const response = userAuthStore.userLogin({
-      userName: username.value,
-      password: password.value,
-      isAdmin: checked.value,
-    })
-    router.push('/')
-  } catch (error) {
-    console.error('Login failed', error)
-  }
+  userAuthStore.logout()
+  // router.push('/')
 }
 </script>
 
