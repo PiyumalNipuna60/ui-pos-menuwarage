@@ -12,11 +12,13 @@
   },
   "dependencies": {
     "@primevue/themes": "^4.2.5",
+    "axios": "^1.7.9",
     "lodash": "^4.17.21",
     "pinia": "^2.3.0",
     "primeflex": "^3.3.1",
     "primeicons": "^7.0.0",
     "primevue": "^4.2.5",
+    "ui-pos-menuwarage": "file:",
     "vue": "^3.5.13",
     "vue-router": "^4.5.0"
   },
