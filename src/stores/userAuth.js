@@ -3,13 +3,14 @@ import { defineStore } from 'pinia'
 import cloneDeep from 'lodash/cloneDeep'
 import { useRoutesStore } from '@/stores/routes'
 import { ApiStatus } from '@/consts/const'
+import { userLogIn } from '@/service/UserService'
 
 export const useUserAuthStore = defineStore('userAuth', () => {
   const routesStore = useRoutesStore()
   const initialUser = {
-    userName: 'Kasun',
+    userName: null,
     password: null,
-    userType: 'user',
+    userType: null,
     token: null,
   }
 
@@ -21,14 +22,20 @@ export const useUserAuthStore = defineStore('userAuth', () => {
 
   const isAuthenticated = computed(() => !!userDetails.value.data.token)
 
-  const userLogin = (data) => {
-    console.log('store log userLogin______________', data)
-    setUser()
+  const userLogin = async () => {
+    try {
+      userDetails.value.status = ApiStatus.LOADING
+      const response = await userLogIn(userDetails.value.data)
+      userDetails.value.data = response
+      setUser()
+      userDetails.value.status = ApiStatus.SUCCESS
+    } catch (error) {
+      userDetails.value.status = ApiStatus.FAILED
+      throw error
+    }
   }
 
   const setUser = () => {
-    console.log('set user log_________', userDetails.value.data)
-    userDetails.value.data.token = 'sample token'
     localStorage.setItem('user_details', JSON.stringify(userDetails.value.data))
     routesStore.initializeRoutes()
   }
@@ -37,11 +44,8 @@ export const useUserAuthStore = defineStore('userAuth', () => {
     return userDetails.value
   }
 
-  const setToken = (newToken) => {
-    localStorage.setItem('auth_token', newToken)
-  }
-
   const logout = () => {
+    console.log('user login out')
     localStorage.removeItem('user_details')
     userDetails.value = {
       data: cloneDeep(initialUser),
@@ -55,12 +59,7 @@ export const useUserAuthStore = defineStore('userAuth', () => {
     if (storedUser) {
       userDetails.value.data = JSON.parse(storedUser)
       routesStore.initializeRoutes()
-      console.log(
-        'storeUser initializeAuth_______',
-        storedUser,
-        userDetails.value.data,
-        userDetails.value.status,
-      )
+      console.log('storeUser initializeAuth_______', storedUser, userDetails.value)
     }
   }
 
@@ -68,9 +67,9 @@ export const useUserAuthStore = defineStore('userAuth', () => {
     isAuthenticated,
     userLogin,
     setUser,
-    setToken,
     logout,
     initializeAuth,
     getUser,
+    userDetails,
   }
 })

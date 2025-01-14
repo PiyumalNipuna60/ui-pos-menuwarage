@@ -20,6 +20,11 @@ const routes = [
     name: 'login',
     component: () => import('../views/LoginView.vue'),
   },
+  {
+    path: '/customer',
+    name: 'customer',
+    component: () => import('../views/CustomerView.vue'),
+  },
 ]
 
 const router = createRouter({

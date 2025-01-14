@@ -7,6 +7,11 @@
   font-weight: normal;
 }
 
+.main-area-container {
+  width: 85%;
+  padding: 1rem;
+}
+
 a,
 .green {
   text-decoration: none;

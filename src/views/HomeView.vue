@@ -3,7 +3,7 @@
     <section class="navigation-panel-home-container">
       <NavigationPanel />
     </section>
-    <section class="col-6"><h1>This is home page</h1></section>
+    <section class="col-6 main-area-container"><h1>This is home page</h1></section>
   </div>
 </template>
 
@@ -14,10 +14,7 @@ import { useUserAuthStore } from '@/stores/userAuth'
 
 const userAuthStore = useUserAuthStore()
 
-onMounted(() => {
-  userAuthStore.logout()
-  console.log('home view ___________', userAuthStore.getUser())
-})
+onMounted(() => {})
 </script>
 
 <style lang="scss">
@@ -25,7 +22,7 @@ onMounted(() => {
   display: flex;
 
   .navigation-panel-home-container {
-    width: 13%;
+    width: 15%;
   }
 }
 </style>

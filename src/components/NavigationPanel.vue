@@ -30,20 +30,25 @@
 import { onMounted, ref } from 'vue'
 import { useRoutesStore } from '@/stores/routes'
 import { useRouter, useRoute } from 'vue-router'
+import { useUserAuthStore } from '@/stores/userAuth'
 
 const router = useRouter()
 const route = useRoute()
 const routesStore = useRoutesStore()
+const { logout } = useUserAuthStore()
 const routesList = ref(routesStore.getRoutesList)
 
 const props = defineProps(['routes'])
 defineEmits(['enlarge-text'])
 
-onMounted(() => {
-  console.log('nav panel log__________', route.path)
-})
+onMounted(() => {})
 
 const routeChange = (route) => {
+  if (route.path === '/logout') {
+    logout()
+    router.push('/login')
+    return
+  }
   router.push(route.path)
 }
 </script>
@@ -59,18 +64,19 @@ const routeChange = (route) => {
 
   .navigation-panel__route-list-container {
     width: 80%;
-    display: grid;
+    display: flex;
+    flex-direction: column;
     height: 100%;
-    grid-template-rows: auto 1fr auto;
+    // grid-template-rows: auto 1fr auto;
   }
 
-  .navigation-panel__route-list-container :nth-last-child(1) {
-    align-self: flex-end;
-  }
+  // .navigation-panel__route-list-container :nth-last-child(1) {
+  //   align-self: flex-end;
+  // }
 
   .navigation-panel__route-container {
     padding: 5px;
-    align-self: start;
+    // align-self: start;
 
     .icon-container {
       margin: 0 10px;

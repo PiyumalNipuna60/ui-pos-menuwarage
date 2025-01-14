@@ -10,14 +10,14 @@
         </div>
         <section class="username-field-container mb-4">
           <FloatLabel variant="on">
-            <InputText id="username" v-model="username" />
+            <InputText id="username" v-model="userDetails.data.userName" />
             <label for="username">Enter your username</label>
           </FloatLabel>
         </section>
 
         <section class="password-field-container mb-3">
           <FloatLabel variant="on">
-            <Password v-model="password" :feedback="false" toggleMask />
+            <Password v-model="userDetails.data.password" :feedback="false" toggleMask />
             <label for="password">Enter your password</label>
           </FloatLabel>
         </section>
@@ -41,21 +41,16 @@ import { useUserAuthStore } from '@/stores/userAuth'
 import { useRouter } from 'vue-router'
 import { onMounted, ref } from 'vue'
 
+const { userDetails } = useUserAuthStore()
 const userAuthStore = useUserAuthStore()
 const router = useRouter()
-
-const username = ref('')
-const password = ref('')
 const checked = ref(false)
 
 onMounted(() => {})
 const userLogin = async () => {
   try {
-    const response = userAuthStore.userLogin({
-      userName: username.value,
-      password: password.value,
-      isAdmin: checked.value,
-    })
+    userDetails.data.userType = checked.value ? 'admin' : 'user'
+    const response = userAuthStore.userLogin()
     router.push('/')
   } catch (error) {
     console.error('Login failed', error)

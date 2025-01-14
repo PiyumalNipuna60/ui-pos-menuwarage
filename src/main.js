@@ -15,6 +15,11 @@ import Checkbox from 'primevue/checkbox'
 import InputText from 'primevue/inputtext'
 import FloatLabel from 'primevue/floatlabel'
 import Password from 'primevue/password'
+import DataTable from 'primevue/datatable'
+import Column from 'primevue/column'
+import ColumnGroup from 'primevue/columngroup'
+import Row from 'primevue/row'
+import Divider from 'primevue/divider'
 
 const app = createApp(App)
 
@@ -34,5 +39,10 @@ app.component('InputText', InputText)
 app.component('Checkbox', Checkbox)
 app.component('FloatLabel', FloatLabel)
 app.component('Password', Password)
+app.component('DataTable', DataTable)
+app.component('Column', Column)
+app.component('ColumnGroup', ColumnGroup)
+app.component('Row', Row)
+app.component('Divider', Divider)
 
 app.mount('#app')
