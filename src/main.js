@@ -20,6 +20,7 @@ import Column from 'primevue/column'
 import ColumnGroup from 'primevue/columngroup'
 import Row from 'primevue/row'
 import Divider from 'primevue/divider'
+import Dropdown from 'primevue/dropdown'
 
 const app = createApp(App)
 
@@ -44,5 +45,6 @@ app.component('Column', Column)
 app.component('ColumnGroup', ColumnGroup)
 app.component('Row', Row)
 app.component('Divider', Divider)
+app.component('Dropdown', Dropdown)
 
 app.mount('#app')
