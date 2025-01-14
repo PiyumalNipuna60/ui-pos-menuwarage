@@ -15,8 +15,6 @@ export async function userLogIn(payload) {
         },
       },
     }
-    console.log('store level log__________', response)
-
     if (response.status === 200) {
       return response.data.user
     } else {
