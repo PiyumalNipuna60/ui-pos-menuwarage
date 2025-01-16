@@ -197,7 +197,6 @@ import NavigationPanel from '../components/NavigationPanel.vue'
 
 const stockStore = useStockStore()
 const { stockList, getInitialStock, resetSelectedProduct } = useStockStore()
-const productStore = useProductStore()
 const { productList, getInitialProduct, loadProducts } = useProductStore()
 
 const stock = ref(null)
@@ -206,7 +205,6 @@ const products = ref(null)
 const productName = ref(null)
 const selectedStock = ref(null)
 const selectedProduct = ref(null)
-const selectedProductFromAll = ref(null)
 
 onMounted(async () => {
   await loadStocksData()
