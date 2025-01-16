@@ -89,8 +89,8 @@
 </template>
 
 <script setup>
-import { onMounted, ref } from 'vue'
 import { useCustomerStore } from '@/stores/customerStore'
+import { onMounted, ref } from 'vue'
 import NavigationPanel from '../components/NavigationPanel.vue'
 
 const customerStore = useCustomerStore()
@@ -159,7 +159,7 @@ const clearInputFields = async () => {
     .p-inputtext,
     .p-password {
       width: 100%;
-      height: 3rem;
+      height: 2.5rem;
     }
     .p-button {
       width: 100%;

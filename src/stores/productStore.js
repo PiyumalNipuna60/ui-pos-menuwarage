@@ -21,6 +21,8 @@ export const useProductStore = defineStore('productStore', () => {
 
   const getProductList = computed(() => productList.value)
 
+  const getInitialProduct = computed(() => cloneDeep(initialProduct))
+
   const loadProducts = async () => {
     try {
       productList.value.status = ApiStatus.LOADING
@@ -85,5 +87,6 @@ export const useProductStore = defineStore('productStore', () => {
     productList,
     getProductList,
     clearSelectedProduct,
+    getInitialProduct,
   }
 })

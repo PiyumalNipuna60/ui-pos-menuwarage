@@ -22,7 +22,7 @@ export const ROUTES = [
   },
   {
     path: '/customer',
-    name: 'Customer manage',
+    name: 'Customer',
     icon: 'pi-user',
     component: 'ProfileView',
     roles: ['user', 'admin'],
@@ -32,6 +32,13 @@ export const ROUTES = [
     name: 'Profile',
     icon: 'pi-home',
     component: 'ProfileView',
+    roles: ['user', 'admin'],
+  },
+  {
+    path: '/stock',
+    name: 'Stock',
+    icon: 'pi-home',
+    component: 'StockView',
     roles: ['user', 'admin'],
   },
   {
