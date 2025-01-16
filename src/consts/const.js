@@ -5,4 +5,4 @@ export const ApiStatus = {
   FAILED: 'failed',
 }
 
- export const BASEURL = 'http://127.0.0.1:8000'
+ export const BASEURL = 'http://3.215.0.240:8080'
