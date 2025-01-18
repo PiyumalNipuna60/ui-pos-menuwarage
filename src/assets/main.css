@@ -1,10 +1,15 @@
 @import './base.css';
 
 #app {
-  max-width: 1280px;
-  margin: 0 auto;
-  padding: 2rem;
+  /* max-width: 1280px; */
+  /* margin: 0 auto; */
+  /* padding: 2rem; */
   font-weight: normal;
+}
+
+.main-area-container {
+  width: 85%;
+  padding: 1rem;
 }
 
 a,
@@ -29,7 +34,9 @@ a,
 
   #app {
     display: grid;
-    grid-template-columns: 1fr 1fr;
-    padding: 0 2rem;
+    height: 100vh;
+    width: 100%;
+    /* grid-template-columns: 1fr 5fr; */
+    /* padding: 0 2rem; */
   }
 }

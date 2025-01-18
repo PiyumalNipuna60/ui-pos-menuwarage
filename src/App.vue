@@ -1,29 +1,44 @@
-<script setup>
-import { RouterLink, RouterView } from 'vue-router'
-import HelloWorld from './components/HelloWorld.vue'
-</script>
-
 <template>
-  <header>
-    <img alt="Vue logo" class="logo" src="@/assets/logo.svg" width="125" height="125" />
-
+  <!-- <header>
     <div class="wrapper">
-      <HelloWorld msg="You did it!" />
-
-      <nav>
+       <nav>
         <RouterLink to="/">Home</RouterLink>
         <RouterLink to="/about">About</RouterLink>
       </nav>
     </div>
-  </header>
+  </header> -->
 
   <RouterView />
 </template>
+<script setup>
+import { RouterLink, RouterView, useRouter } from 'vue-router'
+
+const router = useRouter() // Get the router instance
+
+const buttonClick = () => {
+  router.push('/about') // Navigate to the '/about' route
+}
+</script>
 
 <style scoped>
 header {
   line-height: 1.5;
   max-height: 100vh;
+}
+
+.button {
+  display: inline-block;
+  padding: 0.5rem 1rem;
+  background-color: #007bff;
+  color: white;
+  text-align: center;
+  cursor: pointer;
+  border-radius: 4px;
+  margin-top: 1rem;
+}
+
+.button:hover {
+  background-color: #0056b3;
 }
 
 .logo {
