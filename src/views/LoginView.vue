@@ -1,5 +1,6 @@
 <template>
   <div class="login-form-container">
+    <Toast />
     <div class="login-form-container-left-side">
       <img class="left-side-image" src="/src/assets/images/login-image.jpg" alt="main-logo" />
     </div>
@@ -22,10 +23,10 @@
           </FloatLabel>
         </section>
 
-        <div class="mb-2">
+        <!-- <div class="mb-2">
           <Checkbox v-model="checked" binary class="mr-2" />
           <span class="span">Is Admin?</span>
-        </div>
+        </div> -->
 
         <div class="mb-5">
           <span class="span forget-password" @click="forgetPassword">Forgot password?</span>
@@ -38,22 +39,42 @@
 
 <script setup>
 import { useUserAuthStore } from '@/stores/userAuth'
+import { storeToRefs } from 'pinia'
+import { useToast } from 'primevue/usetoast'
+import { onMounted } from 'vue'
 import { useRouter } from 'vue-router'
-import { onMounted, ref } from 'vue'
 
-const { userDetails } = useUserAuthStore()
-const userAuthStore = useUserAuthStore()
+const toast = useToast()
 const router = useRouter()
-const checked = ref(false)
+// const checked = ref(false)
+
+const { userDetails, hasError } = storeToRefs(useUserAuthStore())
+const userAuthStore = useUserAuthStore()
 
 onMounted(() => {})
 const userLogin = async () => {
   try {
-    userDetails.data.userType = checked.value ? 'admin' : 'user'
-    const response = userAuthStore.userLogin()
-    router.push('/')
+    // userDetails.data.userType = checked.value ? 'admin' : 'user'
+    await userAuthStore.userLogin()
+    if (hasError.value) {
+      console.log('user logged in-', hasError.value, userAuthStore.hasError)
+      toast.add({
+        severity: 'error',
+        summary: userDetails.value.error.title,
+        detail: userDetails.value.error.description,
+        life: 3000,
+      })
+    } else {
+      router.push('/')
+    }
   } catch (error) {
-    console.error('Login failed', error)
+    console.error('Error: ', error)
+    toast.add({
+      severity: 'error',
+      summary: 'Error!',
+      detail: error,
+      life: 3000,
+    })
   }
 }
 
