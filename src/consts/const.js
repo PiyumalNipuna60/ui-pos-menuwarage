@@ -5,7 +5,7 @@ export const ApiStatus = {
   FAILED: 'failed',
 }
 
-export const BASEURL = 'http://3.215.0.240:8080'
+export const BASEURL = 'https://pos-system-service-menuwarage.tequilasl.com'
 
 export const Messages = Object.freeze({
   API_RESPONSE: Object.freeze({
