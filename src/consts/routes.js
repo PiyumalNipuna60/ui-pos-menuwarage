@@ -28,13 +28,6 @@ export const ROUTES = [
     roles: ['user', 'admin'],
   },
   {
-    path: '/profile',
-    name: 'Profile',
-    icon: 'pi-home',
-    component: 'ProfileView',
-    roles: ['user', 'admin'],
-  },
-  {
     path: '/stock',
     name: 'Stock',
     icon: 'pi-home',

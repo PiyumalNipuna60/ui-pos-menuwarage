@@ -35,6 +35,9 @@ const routes = [
     name: 'stock',
     component: () => import('../views/StockView.vue'),
   },
+  { path: '/401', name: 'Error401', component: () => import('../components/errors/ErrorMessage.vue') },
+  { path: '/404', name: 'Error404', component: () => import('../components/errors/ErrorMessage.vue') },
+  { path: '/:pathMatch(.*)*', redirect: '/404' }, 
 ]
 
 const router = createRouter({

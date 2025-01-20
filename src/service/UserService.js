@@ -1,27 +1,28 @@
-import axios from 'axios'
+import axios from '@/utils/axios'
+import { omit } from 'lodash'
 import { BASEURL } from '../consts/const'
 
 export async function userLogIn(payload) {
   try {
-    // const response = await axios.post(`${BASEURL}/user/login`, payload)
-    const response = {
-      status: 200,
-      data: {
-        user: {
-          userName: 'MG4',
-          password: '12345',
-          token: 'sample_token',
-          userType: 'user',
-        },
-      },
-    }
-    if (response.status === 200) {
-      return response.data.user
-    } else {
-      throw new Error('Invalid login attempt')
-    }
+    const response = await axios.post(`${BASEURL}/user/login`, omit(payload, ['token']))
+    return response
   } catch (error) {
-    console.error('API Error at userLogIn:', error)
+    if (!error.customError) {
+      throw {
+        customError: {
+          type: 'unexpected_error',
+          title: 'Unexpected Error',
+          description: 'An unexpected error occurred. Please try again...',
+          details: 'An unexpected error occurred at service -> userLogIn.',
+        },
+      }
+    }
+    console.error(
+      'Error: ',
+      error.customError.details
+        ? omit(error.customError, ['type', 'description'])
+        : omit(error.customError, ['type', 'details']),
+    )
     throw error
   }
 }

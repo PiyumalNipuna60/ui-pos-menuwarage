@@ -1,17 +1,21 @@
-import { ref, computed } from 'vue'
-import { defineStore } from 'pinia'
-import cloneDeep from 'lodash/cloneDeep'
-import { useRoutesStore } from '@/stores/routes'
-import { ApiStatus } from '@/consts/const'
+import { ApiStatus, Messages } from '@/consts/const'
 import { userLogIn } from '@/service/UserService'
+import { useRoutesStore } from '@/stores/routes'
+import cloneDeep from 'lodash/cloneDeep'
+import { defineStore } from 'pinia'
+import { computed, ref } from 'vue'
 
 export const useUserAuthStore = defineStore('userAuth', () => {
   const routesStore = useRoutesStore()
   const initialUser = {
     userName: null,
     password: null,
-    userType: null,
+    role: null,
     token: null,
+    address: null,
+    contact: null,
+    nic: null,
+    demarcationId: null,
   }
 
   const userDetails = ref({
@@ -21,17 +25,37 @@ export const useUserAuthStore = defineStore('userAuth', () => {
   })
 
   const isAuthenticated = computed(() => !!userDetails.value.data.token)
+  const hasError = computed(
+    () => userDetails.value.status === ApiStatus.FAILED || userDetails.value.error,
+  )
 
   const userLogin = async () => {
     try {
       userDetails.value.status = ApiStatus.LOADING
+      userDetails.value.error = null
       const response = await userLogIn(userDetails.value.data)
-      userDetails.value.data = response
-      setUser()
-      userDetails.value.status = ApiStatus.SUCCESS
+      if (response?.status && response.status === Messages.API_RESPONSE.SUCCESS) {
+        userDetails.value.data = response.data.user
+        userDetails.value.data.token = response.data.token
+        setUser()
+        userDetails.value.status = ApiStatus.SUCCESS
+      } else {
+        userDetails.value.status = ApiStatus.FAILED
+        userDetails.value.error = response
+      }
     } catch (error) {
+      let customError = {
+        type: 'unexpected_error',
+        title: 'Unexpected Error',
+        description: 'An unexpected error occurred. Please try again...',
+        details: 'An unexpected error occurred at store -> userLogIn.',
+      }
       userDetails.value.status = ApiStatus.FAILED
-      throw error
+      userDetails.value.error = customError
+      console.error('Error: ', error)
+      throw {
+        customError,
+      }
     }
   }
 
@@ -45,7 +69,6 @@ export const useUserAuthStore = defineStore('userAuth', () => {
   }
 
   const logout = () => {
-    console.log('user login out')
     localStorage.removeItem('user_details')
     userDetails.value = {
       data: cloneDeep(initialUser),
@@ -71,5 +94,6 @@ export const useUserAuthStore = defineStore('userAuth', () => {
     initializeAuth,
     getUser,
     userDetails,
+    hasError,
   }
 })

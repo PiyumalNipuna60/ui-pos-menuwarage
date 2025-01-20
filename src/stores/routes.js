@@ -1,13 +1,13 @@
-import { ref, computed } from 'vue'
-import { defineStore } from 'pinia'
-import { mapRoutesByRole } from '@/utils/utils'
 import { ROUTES } from '@/consts/routes'
 import { useUserAuthStore } from '@/stores/userAuth'
+import { mapRoutesByRole } from '@/utils/utils'
+import { defineStore } from 'pinia'
+import { computed, ref } from 'vue'
 
 export const useRoutesStore = defineStore('routes', () => {
   const routesList = ref([])
   const authStore = useUserAuthStore()
-  const userRole = computed(() => authStore.user?.userType || 'user')
+  const userRole = computed(() => authStore.user?.role || 'user')
 
   const initializeRoutes = () => {
     routesList.value = userRole.value ? mapRoutesByRole(ROUTES, userRole.value) : []
