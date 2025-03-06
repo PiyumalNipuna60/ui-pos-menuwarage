@@ -31,16 +31,16 @@
   --color-border-hover: var(--vt-c-divider-light-1);
 
   --color-heading: var(--vt-c-text-light-1);
-  --color-text: var(--vt-c-text-light-1);
+  --color-text: var(--vt-c-text-light-2);
 
   --section-gap: 160px;
 }
 
 @media (prefers-color-scheme: dark) {
   :root {
-    --color-background: var(--vt-c-black);
-    --color-background-soft: var(--vt-c-black-soft);
-    --color-background-mute: var(--vt-c-black-mute);
+    --color-background: var(--vt-c-white);
+    --color-background-soft: var(--vt-c-white-soft);
+    --color-background-mute: var(--vt-c-white-mute);
 
     --color-border: var(--vt-c-divider-dark-2);
     --color-border-hover: var(--vt-c-divider-dark-1);
@@ -58,10 +58,24 @@
   font-weight: normal;
 }
 
+/* .p-inputtext,
+.p-floatlabel label,
+body,
+.p-select-label,
+.p-select,
+.p-select-overlay {
+  color: #564949 !important;
+  background: #ffffff !important;
+} */
+/* 
+.p-toast-detail {
+  color: #564949 !important;
+} */
+
 body {
   min-height: 100vh;
   color: var(--color-text);
-  background: var(--color-background);
+  /* background: var(--color-background); */
   transition:
     color 0.5s,
     background-color 0.5s;

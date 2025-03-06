@@ -1,30 +1,44 @@
 import { ApiStatus } from '@/consts/const'
 import { addStock, deleteStock, getAllStocks, updateStock } from '@/service/StockService'
+import { flatMap, omit } from 'lodash'
 import cloneDeep from 'lodash/cloneDeep'
 import { defineStore } from 'pinia'
 import { computed, ref } from 'vue'
+import { useProductStore } from './productStore'
+const { productList, getInitialProduct, loadProducts } = useProductStore()
 
 export const useStockStore = defineStore('stockStore', () => {
   const initialStock = {
     stockId: null,
     subTotal: null,
-    createdAt: null,
-    products: [],
+    createdDate: null,
+    invoiceNumber: null,
+    productList: [],
+    status: 'active',
   }
+
   const initialProduct = {
+    id: null,
     productId: null,
-    quantity: null,
-    total: null,
-    freeItems: null,
+    name: null,
     unitPrice: null,
+    initialQty: null,
+    availableQty: null,
+    freeItems: null,
+    total: null,
+    demarcation: null,
+    sataus: 'active',
   }
 
   const stockList = ref({
     data: [],
-    selectedStock: cloneDeep(initialStock),
-    selectedProduct: cloneDeep(initialProduct),
     status: ApiStatus.INIT,
     error: null,
+  })
+
+  const stockStoreDataSet = ref({
+    selectedProduct: cloneDeep(initialProduct),
+    selectedStock: cloneDeep(initialStock),
   })
 
   const getInitialStock = computed(() => cloneDeep(initialStock))
@@ -35,24 +49,34 @@ export const useStockStore = defineStore('stockStore', () => {
     try {
       stockList.value.status = ApiStatus.LOADING
       stockList.value.data = await getAllStocks()
-      clearSelectedStock()
+      mapStockList()
+      clearStockStoreDataSet()
       stockList.value.status = ApiStatus.SUCCESS
     } catch (error) {
       stockList.value.status = ApiStatus.ERROR
-      stockList.value.error = error.message || 'Failed to load stocks.'
+      stockList.value.error = error.message || 'Failed to load stocks!'
       console.error('Error loading stocks:', error)
     }
+  }
+
+  const mapStockList = async () => {
+    stockList.value.mappedStocks = flatMap(stockList.value.data, (entry) =>
+      entry.products.map((product) => ({
+        ...omit(entry, 'products'),
+        ...product,
+      })),
+    )
   }
 
   const saveStock = async () => {
     try {
       stockList.value.status = ApiStatus.LOADING
-      await addStock(stockList.value.selectedStock)
+      await addStock(stockStoreDataSet.value.selectedStock)
       await loadStocks()
       stockList.value.status = ApiStatus.SUCCESS
     } catch (error) {
       stockList.value.status = ApiStatus.ERROR
-      stockList.value.error = error.message || 'Failed to save stock.'
+      stockList.value.error = error.message || 'Failed to save stock!'
       console.error('Error saving stock:', error)
     }
   }
@@ -60,12 +84,12 @@ export const useStockStore = defineStore('stockStore', () => {
   const updateStockDetails = async () => {
     try {
       stockList.value.status = ApiStatus.LOADING
-      await updateStock(stockList.value.selectedStock.stockId, stockList.value.selectedStock)
+      await updateStock(stockStoreDataSet.value.selectedStock)
       await loadStocks()
       stockList.value.status = ApiStatus.SUCCESS
     } catch (error) {
       stockList.value.status = ApiStatus.ERROR
-      stockList.value.error = error.message || 'Failed to update stock.'
+      stockList.value.error = error.message || 'Failed to update stock!'
       console.error('Error updating stock:', error)
     }
   }
@@ -83,23 +107,32 @@ export const useStockStore = defineStore('stockStore', () => {
     }
   }
 
-  const clearSelectedStock = () => {
-    stockList.value.selectedStock = cloneDeep(initialStock)
+  const clearStockStoreDataSet = () => {
+    stockStoreDataSet.value = {
+      selectedProduct: cloneDeep(initialProduct),
+      selectedStock: cloneDeep(initialStock),
+    }
   }
 
   const resetSelectedProduct = () => {
-    stockList.value.selectedProduct = cloneDeep(initialProduct)
+    stockStoreDataSet.value.selectedProduct = cloneDeep(initialProduct)
+  }
+
+  const resetSelectedStock = () => {
+    stockStoreDataSet.value.selectedStock = cloneDeep(initialStock)
   }
 
   return {
+    stockStoreDataSet,
+    stockList,
+    getStockList,
+    getInitialStock,
     loadStocks,
     saveStock,
     updateStockDetails,
     removeStock,
-    stockList,
-    getStockList,
-    getInitialStock,
-    clearSelectedStock,
+    clearStockStoreDataSet,
     resetSelectedProduct,
+    resetSelectedStock,
   }
 })

@@ -18,6 +18,8 @@ import DatePicker from 'primevue/datepicker'
 import Divider from 'primevue/divider'
 import Dropdown from 'primevue/dropdown'
 import FloatLabel from 'primevue/floatlabel'
+import IconField from 'primevue/iconfield'
+import InputIcon from 'primevue/inputicon'
 import InputNumber from 'primevue/inputnumber'
 import InputText from 'primevue/inputtext'
 import Password from 'primevue/password'
@@ -62,5 +64,7 @@ app.component('InputNumber', InputNumber)
 app.component('Chart', Chart)
 app.component('DatePicker', DatePicker)
 app.component('Toast', Toast)
+app.component('InputIcon', InputIcon)
+app.component('IconField', IconField)
 
 app.mount('#app')

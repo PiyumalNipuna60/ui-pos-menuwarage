@@ -71,8 +71,8 @@ const userLogin = async () => {
     console.error('Error: ', error)
     toast.add({
       severity: 'error',
-      summary: 'Error!',
-      detail: error,
+      summary: userDetails.value.error.title,
+      detail: userDetails.value.error.description,
       life: 3000,
     })
   }
