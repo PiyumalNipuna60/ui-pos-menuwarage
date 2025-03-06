@@ -4,18 +4,18 @@ import { BASEURL } from '../consts/const'
 
 export async function userLogIn(payload) {
   try {
-    // const response = await axios.post(`${BASEURL}/user/login`, omit(payload, ['token']))
-    const response = {
-      status: 200,
-      data: {
-        user: {
-          userName: 'MG4',
-          password: '12345',
-          role: 'user',
-        },
-        token: 'sample_token',
-      },
-    }
+    const response = await axios.post(`${BASEURL}/user/login`, omit(payload, ['token']))
+    // const response = {
+    //   status: 200,
+    //   data: {
+    //     user: {
+    //       userName: 'MG4',
+    //       password: '12345',
+    //       role: 'user',
+    //     },
+    //     token: 'sample_token',
+    //   },
+    // }
     return response
   } catch (error) {
     if (!error.customError) {

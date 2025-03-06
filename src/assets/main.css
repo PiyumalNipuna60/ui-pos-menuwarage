@@ -40,3 +40,17 @@ a,
     /* padding: 0 2rem; */
   }
 }
+
+.p-inputnumber {
+  width: 100%;
+  /* margin: 10px; */
+}
+
+.p-inputtext {
+  width: 100%;
+}
+
+.p-floatlabel,
+.p-button {
+  margin: 5px;
+}

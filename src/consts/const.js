@@ -5,7 +5,7 @@ export const ApiStatus = {
   FAILED: 'failed',
 }
 
-export const BASEURL = 'http://127.0.0.1:8000'
+export const BASEURL = 'http://51.20.28.142:8080'
 
 export const Messages = Object.freeze({
   API_RESPONSE: Object.freeze({

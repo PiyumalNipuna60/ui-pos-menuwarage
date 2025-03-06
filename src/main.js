@@ -15,6 +15,7 @@ import ColumnGroup from 'primevue/columngroup'
 import PrimeVue from 'primevue/config'
 import DataTable from 'primevue/datatable'
 import DatePicker from 'primevue/datepicker'
+import Dialog from 'primevue/dialog'
 import Divider from 'primevue/divider'
 import Dropdown from 'primevue/dropdown'
 import FloatLabel from 'primevue/floatlabel'
@@ -66,5 +67,6 @@ app.component('DatePicker', DatePicker)
 app.component('Toast', Toast)
 app.component('InputIcon', InputIcon)
 app.component('IconField', IconField)
+app.component('Dialog', Dialog)
 
 app.mount('#app')

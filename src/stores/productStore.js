@@ -19,7 +19,7 @@ export const useProductStore = defineStore('productStore', () => {
     error: null,
   })
 
-  const getProductList = computed(() => productList.value)
+  const getProductList = computed(() => productList.value.data)
 
   const getInitialProduct = computed(() => cloneDeep(initialProduct))
 
@@ -29,6 +29,7 @@ export const useProductStore = defineStore('productStore', () => {
       productList.value.data = await getAllProducts()
       clearSelectedProduct()
       productList.value.status = ApiStatus.SUCCESS
+      console.log('productStore load products')
     } catch (error) {
       productList.value.status = ApiStatus.ERROR
       productList.value.error = error.message || 'Failed to load products.'
@@ -84,7 +85,6 @@ export const useProductStore = defineStore('productStore', () => {
     saveProduct,
     updateProductDetails,
     removeProduct,
-    productList,
     getProductList,
     clearSelectedProduct,
     getInitialProduct,

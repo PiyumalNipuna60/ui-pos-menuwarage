@@ -1,23 +1,26 @@
 <template>
-  <!-- <header>
-    <div class="wrapper">
-       <nav>
-        <RouterLink to="/">Home</RouterLink>
-        <RouterLink to="/about">About</RouterLink>
-      </nav>
-    </div>
-  </header> -->
-
+  <!-- <section v-if="isLogin" class="navigation-panel-home-container">
+    <NavigationPanel />
+  </section> -->
   <RouterView />
 </template>
 <script setup>
-import { RouterLink, RouterView, useRouter } from 'vue-router'
+import { useUserAuthStore } from '@/stores/userAuth'
+import { onErrorCaptured, onMounted, ref } from 'vue'
+import { RouterView, useRouter } from 'vue-router'
+const userAuthStore = useUserAuthStore()
 
+const isLogin = ref(userAuthStore.isAuthenticated)
 const router = useRouter() // Get the router instance
 
-const buttonClick = () => {
-  router.push('/about') // Navigate to the '/about' route
-}
+onMounted(() => {
+  // console.log('log_____________', isLogin.value)
+})
+
+onErrorCaptured((err) => {
+  console.error('Global Error in app.js:', err)
+  // Optionally, show a toast or redirect to a generic error page
+})
 </script>
 
 <style scoped>
