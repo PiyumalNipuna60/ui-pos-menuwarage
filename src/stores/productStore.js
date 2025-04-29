@@ -29,7 +29,7 @@ export const useProductStore = defineStore('productStore', () => {
       productList.value.data = await getAllProducts()
       clearSelectedProduct()
       productList.value.status = ApiStatus.SUCCESS
-      console.log('productStore load products')
+      return productList.value.data
     } catch (error) {
       productList.value.status = ApiStatus.ERROR
       productList.value.error = error.message || 'Failed to load products.'
@@ -88,5 +88,6 @@ export const useProductStore = defineStore('productStore', () => {
     getProductList,
     clearSelectedProduct,
     getInitialProduct,
+    productList,
   }
 })
