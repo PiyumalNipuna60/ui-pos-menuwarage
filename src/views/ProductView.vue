@@ -36,13 +36,13 @@
           <section class="formgrid grid justify-content-center">
             <section class="username-field-container field col-12 md:col-4 mr-5 mb-5">
               <FloatLabel variant="on">
-                <InputText id="username" v-model="productList.selectedProduct.id" />
+                <InputText id="username" v-model="productId" />
                 <label for="username">Enter product id</label>
               </FloatLabel>
             </section>
             <section class="username-field-container field col-12 md:col-4 mb-5">
               <FloatLabel variant="on">
-                <InputText id="username" v-model="productList.selectedProduct.name" />
+                <InputText id="username" v-model="productName" />
                 <label for="username">Enter product name</label>
               </FloatLabel>
             </section>
@@ -50,7 +50,7 @@
           <section class="formgrid grid justify-content-center mt-3">
             <div class="field col-12 md:col-2 mr-5">
               <Button
-                :label="productList.selectedProduct.id ? 'UPDATE PRODUCT' : 'SAVE PRODUCT'"
+                :label="productId ? 'UPDATE PRODUCT' : 'SAVE PRODUCT'"
                 icon="pi pi-save"
                 iconPos="right"
                 @click="saveProduct"
@@ -111,37 +111,35 @@ const { productList } = useProductStore()
 
 const product = ref(null)
 const products = ref([])
+const productId = ref('')
+const productName = ref('')
 const selectedProduct = ref(null)
 
 onMounted(async () => {
   await loadProductsData()
-  console.log('products list________', productList)
 })
 
 const loadProductsData = async () => {
   try {
-    await productStore.loadProducts()
-    products.value = productList.data
+    products.value = await productStore.loadProducts()
   } catch (error) {
     console.error('Product data load failed', error)
   }
 }
 
 const onRowSelect = () => {
-  productList.selectedProduct = product.value
-  console.log('products list________', productList.selectedProduct)
+  productStore.productList.selectedProduct = product.value
+  console.log('products list________')
 }
 
 const setSelectedProduct = () => {
-  productList.selectedProduct = selectedProduct.value
-  console.log('products list________', productList.selectedProduct)
+  productStore.productList.selectedProduct = selectedProduct.value
+  console.log('products list________')
 }
 
 const saveProduct = async () => {
   try {
-    productList.selectedProduct.id
-      ? productStore.updateProductDetails()
-      : productStore.saveProduct()
+    productId.value ? productStore.updateProductDetails() : productStore.saveProduct()
   } catch (error) {
     console.error('product data load failed', error)
   }

@@ -1,0 +1,41 @@
+{
+  "login": {
+    "title": "user login ta",
+    "username": {
+      "placeholder": "Enter your username ta"
+    },
+    "password": {
+      "placeholder": "Enter your password ta"
+    },
+    "remember-me": "remember me ta",
+    "forget-password": "forget password ta",
+    "no-account": "Don't have and account ? ta",
+    "login": "login ta",
+    "sign-up": "Sign Up ta",
+    "or": "ta"
+  },
+  "signup": {
+    "title": "பயனர் பதிவு",
+    "username": {
+      "placeholder": "உங்கள் பயனர் பெயரை உள்ளிடவும்"
+    },
+    "email": {
+      "placeholder": "உங்கள் மின்னஞ்சலை உள்ளிடவும்"
+    },
+    "nic": {
+      "placeholder": "உங்கள் தேசிய அடையாள அட்டையை உள்ளிடவும்"
+    },
+    "mobile": {
+      "placeholder": "உங்கள் மொபைல் எண்ணை உள்ளிடவும்"
+    },
+    "password": {
+      "placeholder": "உங்கள் கடவுச்சொல்லை உள்ளிடவும்"
+    },
+    "remember-me": "என்னை நினைவில் கொள்க",
+    "forget-password": "கடவுச்சொல்லை மறந்துவிட்டீர்களா?",
+    "have-account": "ஏற்கனவே கணக்கு உள்ளதா?",
+    "login": "உள்நுழைக",
+    "sign-up": "பதிவு செய்யவும்",
+    "or": "அல்லது"
+  }
+}

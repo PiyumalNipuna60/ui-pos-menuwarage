@@ -1,0 +1,41 @@
+{
+  "login": {
+    "title": "user login",
+    "username": {
+      "placeholder": "Enter your username"
+    },
+    "password": {
+      "placeholder": "Enter your password"
+    },
+    "remember-me": "remember me",
+    "forget-password": "forget password ?",
+    "no-account": "Don't have and account ?",
+    "login": "login",
+    "sign-up": "Sign Up",
+    "or": "or"
+  },
+  "signup": {
+    "title": "user Signup",
+    "username": {
+      "placeholder": "Enter your username"
+    },
+    "email": {
+      "placeholder": "Enter your email"
+    },
+    "nic": {
+      "placeholder": "Enter your NIC"
+    },
+    "mobile": {
+      "placeholder": "Enter your mobile number"
+    },
+    "password": {
+      "placeholder": "Enter your password"
+    },
+    "remember-me": "remember me",
+    "forget-password": "forget password ?",
+    "have-account": "Already have an account ?",
+    "login": "login",
+    "sign-up": "Sign Up",
+    "or": "or"
+  }
+}

@@ -1,0 +1,41 @@
+{
+  "login": {
+    "title": "user login si",
+    "username": {
+      "placeholder": "Enter your username si"
+    },
+    "password": {
+      "placeholder": "Enter your password si"
+    },
+    "remember-me": "remember me si",
+    "forget-password": "forget password si",
+    "no-account": "Don't have and account ? si",
+    "login": "login si",
+    "sign-up": "Sign Up si",
+    "or": "or si"
+  },
+  "signup": {
+    "title": "පරිශීලක ලියාපදිංචිය",
+    "username": {
+      "placeholder": "ඔබේ පරිශීලක නාමය ඇතුළත් කරන්න"
+    },
+    "email": {
+      "placeholder": "ඔබේ විද්‍යුත් තැපැල් ලිපිනය ඇතුළත් කරන්න"
+    },
+    "nic": {
+      "placeholder": "ඔබේ ජාතික හැඳුනුම්පත් අංකය ඇතුළත් කරන්න"
+    },
+    "mobile": {
+      "placeholder": "ඔබේ ජංගම දුරකථන අංකය ඇතුළත් කරන්න"
+    },
+    "password": {
+      "placeholder": "ඔබේ මුරපදය ඇතුළත් කරන්න"
+    },
+    "remember-me": "මාව මතක තබා ගන්න",
+    "forget-password": "මුරපදය අමතකද?",
+    "have-account": "අපට ගිණුමක් ඇතිද?",
+    "login": "ඇතුල් වන්න",
+    "sign-up": "ලියාපදිංචි වන්න",
+    "or": "හෝ"
+  }
+}

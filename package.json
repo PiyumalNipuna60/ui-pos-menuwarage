@@ -1,37 +1,43 @@
 {
-  "name": "ui-pos-menuwarage",
+  "name": "menuwarage-pos",
   "version": "0.0.0",
   "private": true,
   "type": "module",
   "scripts": {
     "dev": "vite",
     "build": "vite build",
-    "preview": "vite preview",
-    "lint": "eslint . --fix",
-    "format": "prettier --write src/"
+    "preview": "vite preview"
   },
   "dependencies": {
+    "@primeuix/themes": "^1.0.3",
+    "@primevue/forms": "^4.2.5",
     "@primevue/themes": "^4.2.5",
+    "@vuelidate/core": "^2.0.3",
+    "@vuelidate/validators": "^2.0.4",
     "axios": "^1.7.9",
     "chart.js": "^4.4.7",
     "lodash": "^4.17.21",
     "pinia": "^2.3.0",
     "primeflex": "^3.3.1",
     "primeicons": "^7.0.0",
-    "primevue": "^4.2.5",
-    "ui-pos-menuwarage": "file:",
+    "primevue": "^3.53.1",
     "vue": "^3.5.13",
-    "vue-router": "^4.5.0"
+    "vue-i18n": "^10.0.5",
+    "vue-router": "^4.4.5"
   },
   "devDependencies": {
-    "@eslint/js": "^9.14.0",
+    "@eslint/js": "^9.25.1",
     "@vitejs/plugin-vue": "^5.2.1",
-    "@vue/eslint-config-prettier": "^10.1.0",
-    "eslint": "^9.14.0",
-    "eslint-plugin-vue": "^9.30.0",
-    "prettier": "^3.3.3",
+    "@vitejs/plugin-vue-jsx": "^4.1.1",
+    "@vue/eslint-config-prettier": "^10.2.0",
+    "eslint": "^9.25.1",
+    "eslint-config-prettier": "^10.1.2",
+    "eslint-plugin-prettier": "^5.2.6",
+    "eslint-plugin-vue": "^10.1.0",
+    "globals": "^16.0.0",
+    "prettier": "3.5.3",
     "sass-embedded": "^1.83.1",
-    "vite": "^6.0.5",
-    "vite-plugin-vue-devtools": "^7.6.8"
+    "vite": "^6.0.1",
+    "vite-plugin-vue-devtools": "^7.6.5"
   }
 }
