@@ -1,42 +1,30 @@
 <template>
   <div class="stock-details-container">
-    <div>
-      <section class="stock-details-container__main-container">
-        <section class="input-field-container">
+    <div class="stock-details-container__main-container">
+      <section>
+        <div class="input-field-container">
           <FloatLabel variant="on">
             <InputText id="stockInvoice" v-model="invoiceNumber" />
             <label for="stock">Enter stock invoice</label>
           </FloatLabel>
-        </section>
-        <section class="input-field-container">
+        </div>
+        <div class="input-field-container">
           <FloatLabel variant="on">
-            <DatePicker v-model="createdAt" inputId="date" showIcon iconDisplay="input" />
+            <Calendar v-model="createdAt" inputId="date" showIcon iconDisplay="input" />
             <label for="date">Date</label>
           </FloatLabel>
-        </section>
+        </div>
         <div class="button-field-container">
           <Button label="Add Product" icon="pi pi-plus" @click="toggleDialog"></Button>
         </div>
         <section class="product-adding-dialog-container">
-          <Dialog
-            v-model:visible="visible"
-            :model="true"
-            pt:root:class="!border-0 !bg-transparent"
-            pt:mask:class="backdrop-blur-sm"
-            class="flex flex-col gap-6 rounded-2xl product-adding-dialog w-4"
-          >
+          <Dialog v-model:visible="visible" :model="true" pt:root:class="!border-0 !bg-transparent"
+            pt:mask:class="backdrop-blur-sm" class="flex flex-col gap-6 rounded-2xl product-adding-dialog w-4">
             <template #header>
               <section class="input-field-container w-8">
                 <FloatLabel variant="on">
-                  <Dropdown
-                    v-model="selectedProduct"
-                    :options="productList"
-                    optionLabel="name"
-                    filter
-                    showClear
-                    class="w-full"
-                    @change="setSelectedProduct"
-                  >
+                  <Dropdown v-model="selectedProduct" :options="productList" optionLabel="name" filter showClear
+                    class="w-full" @change="setSelectedProduct">
                     <template #option="slotProps">
                       <div v-if="slotProps.option" class="flex align-items-center">
                         <div>{{ slotProps.option.id }} &nbsp; - &nbsp;</div>
@@ -105,20 +93,10 @@
             <template #footer>
               <section class="dialog-box-footer">
                 <div>
-                  <Button
-                    label="ADD TO TABLE"
-                    icon="pi pi-save"
-                    iconPos="right"
-                    @click="addProductToTable"
-                  ></Button>
+                  <Button label="ADD TO TABLE" icon="pi pi-save" iconPos="right" @click="addProductToTable"></Button>
                 </div>
                 <div>
-                  <Button
-                    label="CLEAR"
-                    icon="pi pi-times"
-                    iconPos="right"
-                    @click="clearInputFields"
-                  ></Button>
+                  <Button label="CLEAR" icon="pi pi-times" iconPos="right" @click="clearInputFields"></Button>
                 </div>
               </section>
               <!-- <Button
@@ -137,18 +115,9 @@
     <Divider />
 
     <section class="stock-data-table-section mt-5">
-      <DataTable
-        v-model:selection="selectedProduct"
-        :value="stockProductList"
-        paginator
-        dataKey="productId"
-        selectionMode="single"
-        :metaKeySelection="false"
-        :rows="5"
-        @rowSelect="onRowSelect"
-        :rowsPerPageOptions="[5, 10, 20, 50]"
-        tableStyle="min-width: 50rem"
-      >
+      <DataTable v-model:selection="selectedProduct" :value="stockProductList" paginator dataKey="productId"
+        selectionMode="single" :metaKeySelection="false" :rows="5" @rowSelect="onRowSelect"
+        :rowsPerPageOptions="[5, 10, 20, 50]" tableStyle="min-width: 50rem">
         <Column field="name" header="Product Name" style="width: 20%"></Column>
         <Column field="initialQuantity" header="Quantity" style="width: 25%"></Column>
         <Column field="unitPrice" header="Unit Price" style="width: 25%"></Column>
@@ -156,12 +125,8 @@
         <Column field="freeItems" header="Free Items" style="width: 20%"></Column>
         <Column field="action" header="Action" style="width: 10%">
           <template #body="slotProps">
-            <Button
-              label="Remove"
-              icon="pi pi-times"
-              iconPos="right"
-              @click="removeProductFromList(slotProps)"
-            ></Button>
+            <Button label="Remove" icon="pi pi-times" iconPos="right"
+              @click="removeProductFromList(slotProps)"></Button>
           </template>
         </Column>
         <ColumnGroup type="footer">
@@ -173,20 +138,11 @@
       </DataTable>
       <section class="flex justify-content-end">
         <div>
-          <Button
-            :label="getSelectedStock?.stockId ? 'UPDATE STOCK' : 'SAVE STOCK'"
-            icon="pi pi-save"
-            iconPos="right"
-            @click="saveStock"
-          ></Button>
+          <Button :label="getSelectedStock?.stockId ? 'UPDATE STOCK' : 'SAVE STOCK'" icon="pi pi-save" iconPos="right"
+            @click="saveStock"></Button>
         </div>
         <div>
-          <Button
-            label="CLEAR TABLE"
-            icon="pi pi-times"
-            iconPos="right"
-            @click="clearStockProductList"
-          ></Button>
+          <Button label="CLEAR TABLE" icon="pi pi-times" iconPos="right" @click="clearStockProductList"></Button>
         </div>
       </section>
     </section>
@@ -306,6 +262,7 @@ const clearInputFields = async () => {
 <style lang="scss">
 .stock-details-container {
   .stock-details-container__main-container {
+
     .input-field-container,
     .button-field-container {
       padding: 0;
@@ -323,16 +280,15 @@ const clearInputFields = async () => {
     height: 50vh;
   }
 }
+
 .product-adding-dialog {
   background-image: radial-gradient(circle at left top, var(--p-primary-400), var(--p-primary-700));
   gap: 1rem !important;
 
-  .input-section-container {
-  }
-
   .input-section-sub-container {
     display: flex;
   }
+
   .dialog-box-footer {
     display: flex;
   }

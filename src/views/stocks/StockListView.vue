@@ -8,22 +8,12 @@
         <h2>STOCK MANAGE</h2>
         <section class="flex w-2 justify-content-end">
           <div v-if="isStockDetails" class="w-full">
-            <Button
-              label="GO BACK"
-              icon="pi pi-arrow-left"
-              iconPos="right"
-              class="w-full"
-              @click="toggleStockDetails(false)"
-            ></Button>
+            <Button label="GO BACK" icon="pi pi-arrow-left" iconPos="right" class="w-full"
+              @click="toggleStockDetails(false)"></Button>
           </div>
           <div v-else class="w-full">
-            <Button
-              label="New"
-              class="w-full"
-              icon="pi pi-plus"
-              iconPos="right"
-              @click="toggleStockDetails(true)"
-            ></Button>
+            <Button label="ADD STOCK" class="w-full" icon="pi pi-plus" iconPos="right"
+              @click="toggleStockDetails(true)"></Button>
           </div>
         </section>
       </div>
@@ -32,23 +22,12 @@
       </div>
       <div v-else class="stock-form-container-stock-table">
         <div class="stock-table-container">
-          <DataTable
-            v-model:expandedRowGroups="expandedRowGroups"
-            :value="mappedStockList"
-            expandableRowGroups
-            rowGroupMode="subheader"
-            groupRowsBy="invoiceNumber"
-            sortMode="single"
-            sortField="invoiceNumber"
-            filterDisplay="row"
-            :sortOrder="1"
-            paginator
-            :rows="10"
-            :rowsPerPageOptions="[10, 20, 50]"
+          <DataTable v-model:expandedRowGroups="expandedRowGroups" :value="mappedStockList" expandableRowGroups
+            rowGroupMode="subheader" groupRowsBy="invoiceNumber" sortMode="single" sortField="invoiceNumber"
+            filterDisplay="row" :sortOrder="1" paginator :rows="10" :rowsPerPageOptions="[10, 20, 50]"
             paginatorTemplate="RowsPerPageDropdown FirstPageLink PrevPageLink CurrentPageReport NextPageLink LastPageLink"
             currentPageReportTemplate="{first} to {last} of {totalRecords}"
-            :globalFilterFields="['name', 'invoiceNumber']"
-          >
+            :globalFilterFields="['name', 'invoiceNumber']">
             <template #header>
               <div class="flex justify-content-end">
                 <IconField>
@@ -60,18 +39,13 @@
               </div>
             </template>
             <template #groupheader="slotProps">
-              <span class="align-middle ml-2 font-bold leading-normal"
-                >Invoice id: &nbsp;{{ slotProps.data.invoiceNumber }} &nbsp; - &nbsp; Created date:
+              <span class="align-middle ml-2 font-bold leading-normal">Invoice id: &nbsp;{{ slotProps.data.invoiceNumber
+              }} &nbsp; - &nbsp; Created date:
                 &nbsp; {{ slotProps.data.createdAt }}
               </span>
 
-              <Button
-                label="UPDATE STOCK"
-                icon="pi pi-plus"
-                iconPos="right"
-                class="update-stock-details-button"
-                @click="updateStockDetails(slotProps.data.stockId)"
-              ></Button>
+              <Button label="UPDATE" icon="pi pi-plus" iconPos="right" class="update-stock-details-button table-button"
+                @click="updateStockDetails(slotProps.data.stockId)"></Button>
             </template>
             <Column field="invoiceNumber" header="Invoice Number"></Column>
             <Column field="productId" header="ProductId" style="width: 15%"></Column>
@@ -97,7 +71,6 @@ import { FilterMatchMode } from '@primevue/core/api'
 import { onMounted, ref } from 'vue'
 import NavigationPanel from '../../components/NavigationPanel.vue'
 import StockDetailsView from './StockDetailsView.vue'
-
 const stockStore = useStockStore()
 const productStore = useProductStore()
 const { loadStocks, resetSelectedStock, setSelectedStock } = useStockStore()
@@ -167,6 +140,7 @@ const updateStockDetails = (stockId) => {
   }
 
   display: flex;
+
   .navigation-panel-stock-container {
     width: 15%;
   }
@@ -185,18 +159,22 @@ const updateStockDetails = (stockId) => {
       align-items: center;
       flex-direction: column;
     }
+
     .stock-table-container {
       width: 100%;
     }
+
     .stock-header {
       font-weight: 700;
     }
+
     .p-inputtext,
     .p-password,
     .p-inputnumber {
       width: 100%;
       height: 2.5rem;
     }
+
     .update-stock-details-button {
       right: 0;
       position: absolute;
@@ -211,6 +189,7 @@ const updateStockDetails = (stockId) => {
     .p-datatable-table-container {
       max-height: 69vh;
     }
+
     .stock-form-container {
       background: white;
       height: 100vh;
@@ -220,6 +199,7 @@ const updateStockDetails = (stockId) => {
       grid-template-columns: 1fr 1fr;
       color: #151717;
     }
+
     .stock-stock-form-container-left-side {
       object-fit: cover;
     }
